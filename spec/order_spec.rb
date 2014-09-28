@@ -15,4 +15,18 @@ describe Order do
 		expect(order.customer_name).not_to be nil
 	end
 
+	it "should be able to add a dish to the order" do
+		order.add(dish, 2)
+		expect(order.ordered_items).to include(['Noodles', 4.70, 2])
+	end
+
+	it "should get a line item total" do
+		order.add(dish, 2)
+		expect(order.get_total(order.ordered_items[0])).to eq "£9.40"
+	end
+
+	it "should be able to calculate the total bill" do
+		order.add(dish, 2)
+		expect(order.get_bill_total).to eq "£9.40"
+	end
 end
